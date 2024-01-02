@@ -1,4 +1,4 @@
-# ImageReplicator
+# Genereate Images in the loop with dalle-3 and GPT-vision
 
 ImageReplicator is a Python tool for replicating or generating images based on textual descriptions, with the power of OpenAI's GPT-4 and DALL-E 3 models. It allows users to describe an image, modify the description to match user inputs, and then generate an image that aligns with the modified description.
 

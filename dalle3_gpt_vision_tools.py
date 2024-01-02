@@ -126,27 +126,33 @@ class ImageReplicator:
     
     def read_input(self):
         instruction = input(f"Enter an instruction ({self.function}) (token={self.max_tokens}) (or 'quit' to exit): ")
+        instruction = self.decode_instructions(instruction)
+        
         return instruction
 
 
     def run(self):
         quit_flag = False
         while True and not quit_flag:
-            instruction = self.read_input()
-            if instruction.lower() == 'quit':
-                break            
-            instruction = self.decode_instructions(instruction)
             
+            
+            instruction = self.read_input()
+            
+            if instruction.lower() == 'quit':
+                break           
             
             if self.function == "gen":
                 b64_data = self.generate_image(instruction)
                 self.save_image(b64_data)           
                 print("Image generated successfully!")
             
-            while True and self.function == "loop":
-                instruction = self.read_input()
-                instruction = self.decode_instructions(instruction)
-                if self.function == "loop":
+            if self.function == "loop":
+                #generate first image
+                b64_data = self.generate_image(instruction)
+                self.save_image(b64_data)          
+                
+                while True and self.function == "loop":                   
+                    instruction = self.read_input()
                     if instruction.lower() == 'quit':
                         quit_flag = True
                         break
@@ -154,7 +160,6 @@ class ImageReplicator:
                         description = self.get_description(b64_data, instruction)
                         b64_data = self.generate_image(description) 
                         self.save_image(b64_data)
-
                         print("Image generated successfully!")
             
             if self.function == "replicate":

@@ -35,16 +35,15 @@ To stop the program, you can simply type 'quit'.
 Here is how you can run the ImageReplicator:
 
 ```python
-from openai import OpenAI 
-import os
-import base64
-from PIL import Image
-from io import BytesIO
-import time
-
 api_key = get_api_key()
 replicator = ImageReplicator(api_key, function="replicate")
 replicator.run()
+```
+
+Or simply:
+
+```
+$python dalle3_gpt_vision_tools.py
 ```
 
 
